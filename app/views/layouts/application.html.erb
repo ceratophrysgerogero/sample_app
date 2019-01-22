@@ -8,8 +8,13 @@
   <body>
     <%= render 'layouts/header' %>
     <div class="container">
+      <% flash.each do |message_type, message| %>
+        <%= content_tag(:div, message, class: "alert alert-#{message_type}") %>
+      <% end %>
       <%= yield %>
       <%= render 'layouts/footer' %>
+      <!--if Rails.env.development?:本番環境でデバック情報を表示させない  -->
+     <%= debug(params) if Rails.env.development? %>
     </div>
   </body>
 </html>
